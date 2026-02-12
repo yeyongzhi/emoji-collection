@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { fetchEmojis, fetchMessages } from "emojibase";
+import { toast } from 'vue-sonner'
 
 const EMOJI_LIKE_KEY = 'emoji_like'
 const EMOJI_HISTORY_KEY = 'emoji_history'
@@ -91,6 +92,12 @@ export const useEmojiStore = defineStore("emoji", () => {
     localStorage.setItem(EMOJI_HISTORY_KEY, JSON.stringify(history.value))
   }
 
+  const clearEmojiLike = () => {
+    likes.value = []
+    localStorage.setItem(EMOJI_LIKE_KEY, JSON.stringify(likes.value))
+    toast.success("已清空所有收藏")
+  }
+
   // 初始化一次
   init()
 
@@ -105,5 +112,6 @@ export const useEmojiStore = defineStore("emoji", () => {
     setEmojiHistory,
     getEmojiHistory,
     cancelEmojiHistory,
+    clearEmojiLike,
   };
 });

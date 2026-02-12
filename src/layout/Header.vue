@@ -26,7 +26,6 @@ const appStore = useAppStore()
   <div class="border border-b w-full flex justify-between items-center h-[60px] p-(--padding-l) box-border">
     <div class="font-bold text-2xl flex items-center">
       Emoji 使用指南【看这就够了】
-      <Label class="cursor-pointer">每个图标点击即可复制</Label>
     </div>
     <div class="flex justify-center items-center gap-x-(--margin-xs)">
       <NavigationMenu>

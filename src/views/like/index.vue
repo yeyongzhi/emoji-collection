@@ -20,15 +20,12 @@ const emojiStore = useEmojiStore()
 
 const likeItems = computed(() => emojiStore.getEmojiLike)
 
-console.log(likeItems.value)
-
 const likeData = computed(() => {
     let likeHexCodes = likeItems.value.map(item => item.hexcode)
     return emojiStore.emojiData.filter((item: any) => {
         return likeHexCodes.includes(item.hexcode)
     })
 })
-console.log(likeData.value)
 
 const gotoBase = () => {
     appStore.handleMenuSelect('base')
@@ -44,16 +41,21 @@ const gotoBase = () => {
                     <!-- <FolderOpen /> -->
                 </EmptyMedia>
             </EmptyHeader>
-            <EmptyTitle>暂无收藏❤️</EmptyTitle>
+            <EmptyTitle>暂无收藏💔</EmptyTitle>
             <EmptyDescription>有些常用的表情可以收藏一下在这里可以快速找到🚩</EmptyDescription>
             <EmptyContent>
                 <Button class="cursor-pointer" @click="gotoBase">去看看</Button>
             </EmptyContent>
         </Empty>
         <template v-else>
-            <div class="w-full flex justify-start items-center mb-(--margin-l)">
+            <div class="w-full flex justify-between items-center mb-(--margin-l)">
                 <Input class="w-[400px]" placeholder="请输入关键字进行搜索" />
-                <Label class="ml-(--margin-l)">共 <span class="font-bold text-xl">{{ likeItems.length }}</span> 个收藏</Label>
+                <div class="flex items-center gap-(--margin-l)">
+                    <Label>共<span class="font-bold text-xl">{{ likeItems.length }}</span>个收藏</Label>
+                    <Button variant="destructive" @click="emojiStore.clearEmojiLike">
+                        一键取消收藏
+                    </Button>
+                </div>
             </div>
             <div class="w-full grid grid-cols-10 gap-(--margin-s)">
                 <div v-for="emoji in likeData" :key="emoji.key">

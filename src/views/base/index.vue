@@ -112,7 +112,8 @@ onUnmounted(() => {
         </Card>
         <div class="h-full flex-1">
             <ScrollArea class="w-full h-full">
-                <Card :class="`${index === data.length - 1 ? 'mt-0' : 'mb-(--margin-xl)'}`" v-for="(item, index) in data" :key="item.key" :id="`${EMOJI_GROUP_ID_PREFIX}${item.key}`">
+                <Card :class="`${index === data.length - 1 ? 'mt-0' : 'mb-(--margin-xl)'}`"
+                    v-for="(item, index) in data" :key="item.key" :id="`${EMOJI_GROUP_ID_PREFIX}${item.key}`">
                     <CardHeader>
                         <CardTitle class="app_page_title w-full font-bold text-2xl">{{ item.name }}</CardTitle>
                     </CardHeader>

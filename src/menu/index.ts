@@ -32,6 +32,13 @@ const APP_MENU = [
           () => import("@/views/version/index.vue"),
         ),
       },
+      {
+        key: "about",
+        name: "应用介绍",
+        component: defineAsyncComponent(
+          () => import("@/views/about/index.vue"),
+        ),
+      }
     ],
   },
 ];

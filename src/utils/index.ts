@@ -6,6 +6,10 @@ export function defaultValue<T>(value: T | undefined, defaultValue: T): T {
   return isDefined(value) ? value : defaultValue;
 }
 
+export function openLink(url: string) {
+  window.open(url, '_blank');
+}
+
 export async function copyText(text: string) {
   try {
     await navigator.clipboard.writeText(text)
