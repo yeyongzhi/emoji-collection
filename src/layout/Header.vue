@@ -3,6 +3,8 @@ import { Switch } from '@/components/ui/switch'
 import {
   NavigationMenu,
   NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
   NavigationMenuLink,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu'
@@ -12,6 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { Label } from '@/components/ui/label'
 import { useAppStore } from '@/store/index'
 import APP_MENU from '@/menu/index'
 
@@ -20,16 +23,31 @@ const appStore = useAppStore()
 </script>
 
 <template>
-  <div
-    class="border border-b w-full flex justify-between items-center h-[60px] p-(--padding-l) box-border">
-    <div class="font-bold text-2xl">🔥Emoji 使用指南【看这就够了】</div>
+  <div class="border border-b w-full flex justify-between items-center h-[60px] p-(--padding-l) box-border">
+    <div class="font-bold text-2xl flex items-center">
+      Emoji 使用指南【看这就够了】
+      <Label class="cursor-pointer">每个图标点击即可复制</Label>
+    </div>
     <div class="flex justify-center items-center gap-x-(--margin-xs)">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem v-for="menu in APP_MENU" :key="menu.key">
-            <NavigationMenuLink as-child>
+            <NavigationMenuLink as-child v-if="!menu.children">
               <a class="cursor-pointer" @click="appStore.handleMenuSelect(menu.key)">{{ menu.name }}</a>
+              <div v-if="menu.key === appStore.menuKey" class="w-full h-[2px] bg-(--color-primary)"></div>
             </NavigationMenuLink>
+            <template v-else>
+              <NavigationMenuTrigger>{{ menu.name }}</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul class="grid w-[100px] gap-(--margin-xs)">
+                  <li v-for="item in menu.children" :key="item.key">
+                    <NavigationMenuLink as-child>
+                      <a class="cursor-pointer" @click="appStore.handleMenuSelect(item.key)">{{ item.name }}</a>
+                    </NavigationMenuLink>
+                  </li>
+                </ul>
+              </NavigationMenuContent>
+            </template>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
@@ -47,6 +65,4 @@ const appStore = useAppStore()
   </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

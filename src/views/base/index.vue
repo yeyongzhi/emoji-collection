@@ -117,7 +117,7 @@ onUnmounted(() => {
                         <CardTitle class="app_page_title w-full font-bold text-2xl">{{ item.name }}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div class="w-full grid grid-cols-12 gap-(--margin-s)">
+                        <div class="w-full grid grid-cols-10 gap-(--margin-s)">
                             <div v-for="emoji in item.children" :key="emoji.key">
                                 <EmojiItem :data="emoji" />
                             </div>

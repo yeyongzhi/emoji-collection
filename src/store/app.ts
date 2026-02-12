@@ -28,8 +28,19 @@ export const useAppStore = defineStore("app", () => {
     menuKey.value = key
   }
   const currentMenuComponent = computed(() => {
-    const menu = APP_MENU.find((item) => item.key === menuKey.value)
-    return menu?.component || null
+    let targetMenu: any = null
+    APP_MENU.forEach((item) => {
+      if (item.key === menuKey.value) {
+        targetMenu = item
+      } else if (item.children) {
+        item.children.forEach((child) => {
+          if (child.key === menuKey.value) {
+            targetMenu = child
+          }
+        })
+      }
+    })
+    return targetMenu?.component || null
   })
 
   return {

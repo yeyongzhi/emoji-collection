@@ -1,35 +1,42 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { copyText } from '@/utils/index'
 import { toast } from 'vue-sonner'
 import { Button } from '@/components/ui/button'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog'
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip'
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog'
 import { Badge } from '@/components/ui/badge'
+import { useEmojiStore, type EmojiLikeItem } from '@/store/emoji'
 
-const { data } = defineProps({
+const emojiStore = useEmojiStore()
+
+const { data, showLabel } = defineProps({
     data: {
         type: Object,
         default: () => ({})
+    },
+    showLabel: {
+        type: Boolean,
+        default: true
     }
 })
 
-const copyEmoji = async (str: string) => {
+const copyEmoji = async (str: string, isUnicode: boolean = false) => {
     const res = await copyText(str)
+    if(isUnicode) {
+        emojiStore.setEmojiHistory(data as EmojiLikeItem)
+    }
     if (res) {
         toast.success('复制成功')
     } else {
@@ -38,21 +45,46 @@ const copyEmoji = async (str: string) => {
 }
 
 const likeEmoji = () => {
-    toast.success('收藏成功')
+    if (!isLike.value) {
+        emojiStore.setEmojiLike(data as EmojiLikeItem)
+        toast.success('收藏成功')
+    } else {
+        emojiStore.cancelEmojiLike(data as EmojiLikeItem)
+        toast.error('已取消收藏')
+    }
+
 }
 
 const open = ref(false)
 
+const isLike = computed(() => {
+    let hexcodes = emojiStore.getEmojiLike.map(item => item.hexcode)
+    return hexcodes.includes(data.hexcode)
+})
+
 </script>
 
 <template>
-    <div class="border rounded-xl p-(--padding-s) flex-col justify-center items-center">
-        <div title="点击复制" class="value text-center text-2xl" @click="copyEmoji(data.unicode)">{{ data.unicode }}</div>
-        <div title="点击复制" class="text-xs w-full text-center mt-(--margin-s)" @click="copyEmoji(data.label)">{{ data.label }}
-        </div>
+    <div class="border border-2 rounded-xl p-(--padding-s) flex-col justify-center items-center">
+        <div title="点击复制" class="value text-center text-2xl" @click="copyEmoji(data.unicode, true)">{{ data.unicode }}</div>
+        <div v-if="showLabel" title="点击复制" class="text-sm w-full text-center mt-(--margin-s)" @click="copyEmoji(data.label)">{{
+            data.label }}</div>
+        <TooltipProvider v-if="data.description && data.description !== ''">
+            <Tooltip>
+                <TooltipTrigger class="w-full">
+                    <div class="text-muted-foreground text-xs w-full text-center mt-(--margin-s) overflow-hidden whitespace-nowrap text-ellipsis">
+                        Tips: {{ data.description }}</div>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>{{ data.description }}</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
+
         <div class="w-full mt-(--margin-s) flex gap-(--margin-xs) justify-center items-center">
             <Button @click="open = true" size="sm" variant="secondary" class="cursor-pointer">详情</Button>
-            <Button size="sm" variant="secondary" class="cursor-pointer">收藏</Button>
+            <Button @click="likeEmoji" size="sm" :variant="isLike ? 'default' : 'secondary'" class="cursor-pointer">{{
+                isLike ? '取消收藏' : '收藏' }}</Button>
             <!-- <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger>

@@ -18,17 +18,14 @@ import EmojiItem from '@/views/components/EmojiItem.vue'
 const appStore = useAppStore()
 const emojiStore = useEmojiStore()
 
-const likeItems = computed(() => emojiStore.getEmojiLike)
+const historyItems = computed(() => emojiStore.getEmojiHistory)
 
-console.log(likeItems.value)
-
-const likeData = computed(() => {
-    let likeHexCodes = likeItems.value.map(item => item.hexcode)
+const historyData = computed(() => {
+    let historyHexCodes = historyItems.value.map(item => item.hexcode)
     return emojiStore.emojiData.filter((item: any) => {
-        return likeHexCodes.includes(item.hexcode)
+        return historyHexCodes.includes(item.hexcode)
     })
 })
-console.log(likeData.value)
 
 const gotoBase = () => {
     appStore.handleMenuSelect('base')
@@ -38,14 +35,14 @@ const gotoBase = () => {
 
 <template>
     <div class="w-full h-full">
-        <Empty class="w-full h-full" v-if="likeItems.length === 0">
+        <Empty class="w-full h-full" v-if="historyItems.length === 0">
             <EmptyHeader>
                 <EmptyMedia variant="icon">
                     <!-- <FolderOpen /> -->
                 </EmptyMedia>
             </EmptyHeader>
-            <EmptyTitle>暂无收藏❤️</EmptyTitle>
-            <EmptyDescription>有些常用的表情可以收藏一下在这里可以快速找到🚩</EmptyDescription>
+            <EmptyTitle>这里空空如也</EmptyTitle>
+            <EmptyDescription>你每复制一次我就当你使用过一次了哈</EmptyDescription>
             <EmptyContent>
                 <Button class="cursor-pointer" @click="gotoBase">去看看</Button>
             </EmptyContent>
@@ -53,10 +50,9 @@ const gotoBase = () => {
         <template v-else>
             <div class="w-full flex justify-start items-center mb-(--margin-l)">
                 <Input class="w-[400px]" placeholder="请输入关键字进行搜索" />
-                <Label class="ml-(--margin-l)">共 <span class="font-bold text-xl">{{ likeItems.length }}</span> 个收藏</Label>
             </div>
             <div class="w-full grid grid-cols-10 gap-(--margin-s)">
-                <div v-for="emoji in likeData" :key="emoji.key">
+                <div v-for="emoji in historyData" :key="emoji.key"> 
                     <EmojiItem :data="emoji" />
                 </div>
             </div>

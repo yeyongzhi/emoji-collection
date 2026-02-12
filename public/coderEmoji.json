@@ -1,0 +1,384 @@
+{
+  "name": "程序员常用Emoji",
+  "data": [
+    {
+      "key": "top",
+      "name": "🔥最常用 Top 10",
+      "data": [
+        { "emoji": "✨", "hexcode": "2728", "description": "新功能" },
+        { "emoji": "🐞", "hexcode": "1F41B", "description": "修 Bug" },
+        { "emoji": "🚀", "hexcode": "1F680", "description": "部署上线" },
+        {
+          "emoji": "✅",
+          "hexcode": "2705",
+          "description": "功能完成、测试通过"
+        },
+        {
+          "emoji": "⚠️",
+          "hexcode": "26A0",
+          "description": "代码异味、潜在风险"
+        },
+        {
+          "emoji": "📝",
+          "hexcode": "1F4DD",
+          "description": "编写文档、更新 README"
+        },
+        { "emoji": "🔧", "hexcode": "1F527", "description": "配置、工程修复" },
+        {
+          "emoji": "🧹",
+          "hexcode": "1F9F9",
+          "description": "清理无用代码、格式化"
+        },
+        { "emoji": "📦", "hexcode": "1F4E6", "description": "依赖管理、打包" },
+        {
+          "emoji": "🔒",
+          "hexcode": "1F512",
+          "description": "安全策略、权限控制"
+        }
+      ]
+    },
+    {
+      "key": "git",
+      "name": "✨️Git 提交规范",
+      "data": [
+        {
+          "emoji": "✨",
+          "hexcode": "2728",
+          "description": "添加新功能、模块或接口"
+        },
+        {
+          "emoji": "🐛",
+          "hexcode": "1F41B",
+          "description": "修复程序中的错误或异常行为"
+        },
+        {
+          "emoji": "🚀",
+          "hexcode": "1F680",
+          "description": "用于部署、发布版本等"
+        },
+        {
+          "emoji": "📦",
+          "hexcode": "1F4E6",
+          "description": "更新依赖、构建配置、包管理"
+        },
+        {
+          "emoji": "💄",
+          "hexcode": "1F484",
+          "description": "CSS、UI 微调、视觉优化"
+        },
+        {
+          "emoji": "🎨",
+          "hexcode": "1F3A8",
+          "description": "代码风格调整、格式化（不改变逻辑）"
+        },
+        {
+          "emoji": "🔧",
+          "hexcode": "1F527",
+          "description": "修改配置、环境变量、工具设置等"
+        },
+        {
+          "emoji": "📝",
+          "hexcode": "1F4DD",
+          "description": "README、注释、文档等"
+        },
+        {
+          "emoji": "🔒",
+          "hexcode": "1F512",
+          "description": "修复安全漏洞、权限问题等"
+        },
+        {
+          "emoji": "⚡️",
+          "hexcode": "26A1",
+          "description": "提升性能、减少资源消耗"
+        },
+        {
+          "emoji": "♻️",
+          "hexcode": "267B",
+          "description": "重构代码结构，不改变外部行为"
+        },
+        {
+          "emoji": "🧪",
+          "hexcode": "1F9EA",
+          "description": "添加/修改测试用例"
+        },
+        {
+          "emoji": "💥",
+          "hexcode": "1F4A5",
+          "description": "不兼容的 API 变更"
+        },
+        {
+          "emoji": "🗑️",
+          "hexcode": "1F5D1",
+          "description": "移除无用代码、文件等"
+        },
+        {
+          "emoji": "🌐",
+          "hexcode": "1F310",
+          "description": "多语言支持、i18n 相关"
+        },
+        {
+          "emoji": "🚑",
+          "hexcode": "1F691",
+          "description": "严重 bug 的热修复"
+        }
+      ]
+    },
+    {
+      "key": "tools",
+      "name": "🔧通用开发 & 工具",
+      "data": [
+        {
+          "emoji": "⚙️",
+          "hexcode": "2699",
+          "description": "配置、环境设置、系统参数调整"
+        },
+        {
+          "emoji": "🔧",
+          "hexcode": "1F527",
+          "description": "工具脚本、构建修复、工程配置"
+        },
+        {
+          "emoji": "📦",
+          "hexcode": "1F4E6",
+          "description": "依赖管理、打包、模块拆分"
+        },
+        {
+          "emoji": "📄",
+          "hexcode": "1F4C4",
+          "description": "修改配置文件（如 .json, .yaml）"
+        },
+        {
+          "emoji": "📝",
+          "hexcode": "1F4DD",
+          "description": "编写文档、更新 README、注释"
+        },
+        {
+          "emoji": "🧩",
+          "hexcode": "1F9E9",
+          "description": "集成第三方库、微服务对接"
+        },
+        {
+          "emoji": "🧪",
+          "hexcode": "1F9EA",
+          "description": "实验性功能、A/B 测试"
+        },
+        {
+          "emoji": "📚",
+          "hexcode": "1F4DA",
+          "description": "文档引用、知识库更新"
+        }
+      ]
+    },
+    {
+      "key": "version",
+      "name": "💬版本控制 & 协作",
+      "data": [
+        {
+          "emoji": "🌿",
+          "hexcode": "1F33F",
+          "description": "创建/切换功能分支（常用于 Git 分支）"
+        },
+        {
+          "emoji": "🌱",
+          "hexcode": "1F331",
+          "description": "新功能分支、初期开发"
+        },
+        {
+          "emoji": "🔀",
+          "hexcode": "1F504",
+          "description": "合并代码、PR 合并"
+        },
+        {
+          "emoji": "🔄",
+          "hexcode": "1F504",
+          "description": "同步代码、重试 CI、刷新状态"
+        },
+        {
+          "emoji": "📌",
+          "hexcode": "1F4CC",
+          "description": "标记重要提交、固定版本"
+        },
+        {
+          "emoji": "👥",
+          "hexcode": "1F465",
+          "description": "结对编程、团队协作"
+        },
+        {
+          "emoji": "💬",
+          "hexcode": "1F4AC",
+          "description": "代码评审、讨论需求"
+        },
+        {
+          "emoji": "📁",
+          "hexcode": "1F4C1",
+          "description": "重构目录结构、移动文件"
+        }
+      ]
+    },
+    {
+      "key": "code",
+      "name": "🐞调试 & 代码质量",
+      "data": [
+        {
+          "emoji": "✅",
+          "hexcode": "2705",
+          "description": "功能完成、测试通过、CI 成功"
+        },
+        {
+          "emoji": "❌",
+          "hexcode": "274C",
+          "description": "测试失败、功能中断"
+        },
+        {
+          "emoji": "⚠️",
+          "hexcode": "26A0",
+          "description": "代码异味、潜在风险"
+        },
+        { "emoji": "🐞", "hexcode": "1F41B", "description": "修复 Bug" },
+        {
+          "emoji": "🔍",
+          "hexcode": "1F50D",
+          "description": "调试、排查问题、代码审查"
+        },
+        {
+          "emoji": "🧹",
+          "hexcode": "1F9F9",
+          "description": "清理无用代码、格式化、技术债"
+        },
+        {
+          "emoji": "🚨",
+          "hexcode": "1F6A8",
+          "description": "严重错误、监控告警"
+        }
+      ]
+    },
+    {
+      "key": "devOps",
+      "name": "🚀部署 & 运维 (DevOps)",
+      "data": [
+        {
+          "emoji": "🚀",
+          "hexcode": "1F680",
+          "description": "部署上线、发布新版本"
+        },
+        {
+          "emoji": "🌍",
+          "hexcode": "1F30D",
+          "description": "国际化、多区域部署"
+        },
+        {
+          "emoji": "📡",
+          "hexcode": "1F4E1",
+          "description": "API 监控、网络请求追踪"
+        },
+        {
+          "emoji": "🧰",
+          "hexcode": "1F9F0",
+          "description": "紧急修复、系统维护"
+        },
+        {
+          "emoji": "🔒",
+          "hexcode": "1F512",
+          "description": "安全策略、权限控制、加密"
+        },
+        {
+          "emoji": "📈",
+          "hexcode": "1F4C8",
+          "description": "性能优化、指标提升"
+        },
+        {
+          "emoji": "⏱️",
+          "hexcode": "23F1",
+          "description": "延迟优化、响应时间改进"
+        },
+        { "emoji": "💥", "hexcode": "1F4A5", "description": "服务崩溃（慎用）" }
+      ]
+    },
+    {
+      "key": "ui",
+      "name": "🎨前端 & UI/UX",
+      "data": [
+        {
+          "emoji": "🎨",
+          "hexcode": "1F3A8",
+          "description": "主题切换、CSS 样式调整"
+        },
+        {
+          "emoji": "📱",
+          "hexcode": "1F4F1",
+          "description": "移动端适配、响应式布局"
+        },
+        { "emoji": "💻", "hexcode": "1F4BB", "description": "桌面端功能" },
+        { "emoji": "🖼️", "hexcode": "1F5BC", "description": "图片/图标更新" },
+        {
+          "emoji": "✨",
+          "hexcode": "2728",
+          "description": "动画效果、亮点功能"
+        },
+        { "emoji": "🎭", "hexcode": "1F3AD", "description": "暗黑/明亮模式" },
+        {
+          "emoji": "🎯",
+          "hexcode": "1F3AF",
+          "description": "用户行为追踪、精准定位"
+        }
+      ]
+    },
+    {
+      "key": "data",
+      "name": "🧮后端 & 数据",
+      "data": [
+        {
+          "emoji": "📊",
+          "hexcode": "1F4CA",
+          "description": "数据可视化、报表"
+        },
+        {
+          "emoji": "🗃️",
+          "hexcode": "1F5C3",
+          "description": "数据库操作、Schema 变更"
+        },
+        { "emoji": "↔️", "hexcode": "2194", "description": "数据同步、ETL" },
+        { "emoji": "🧮", "hexcode": "1F9EE", "description": "算法、数学逻辑" },
+        { "emoji": "🧠", "hexcode": "1F9E0", "description": "AI/ML 集成" },
+        {
+          "emoji": "📥",
+          "hexcode": "1F4E5",
+          "description": "API 输入、接收数据"
+        },
+        {
+          "emoji": "📤",
+          "hexcode": "1F4E4",
+          "description": "API 输出、发送数据"
+        }
+      ]
+    },
+    {
+      "key": "project",
+      "name": "🚩项目管理 & 任务跟踪",
+      "data": [
+        {
+          "emoji": "🚩",
+          "hexcode": "1F6A9",
+          "description": "技术债、待办事项"
+        },
+        { "emoji": "🏁", "hexcode": "1F3C1", "description": "里程碑完成" },
+        {
+          "emoji": "⏰",
+          "hexcode": "23F0",
+          "description": "定时任务、超时处理"
+        },
+        { "emoji": "📅", "hexcode": "1F4C5", "description": "版本规划、排期" },
+        {
+          "emoji": "🔁",
+          "hexcode": "1F501",
+          "description": "重复任务、定时作业"
+        },
+        {
+          "emoji": "🛑",
+          "hexcode": "1F6D1",
+          "description": "阻塞问题、暂停开发"
+        }
+      ]
+    }
+  ]
+}

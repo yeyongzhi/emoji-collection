@@ -23,4 +23,6 @@
 
 # 参考资料
 
-- [Vue Sonner 官方文档](https://vue-sonner.vercel.app/)
+- [tailwindcss 官网](https://tailwindcss.com/docs/opacity)
+- [shadcnUI 文档](https://www.shadcn-vue.com/docs/components/tooltip)
+- [Vue Sonner 项目仓库](https://github.com/antfu/vue-sonner)
