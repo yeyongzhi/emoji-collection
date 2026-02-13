@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { fetchEmojis, fetchMessages } from "emojibase";
 import { toast } from 'vue-sonner'
 
 const EMOJI_LIKE_KEY = 'emoji_like'
 const EMOJI_HISTORY_KEY = 'emoji_history'
+const LOCAL_HISTORY_COUNT_KEY = 'EMOJI_COLLECTION_HISTORY_COUNT_KEY'
+const DEFAULT_HISTORY_COUNT = 50
 
 export type EmojiLikeItem = {
   unicode: string,
@@ -28,7 +30,22 @@ export const useEmojiStore = defineStore("emoji", () => {
 
   // 响应式状态
   const likes = ref<EmojiLikeItem[]>([])
+  const historySize = ref(Number(localStorage.getItem(LOCAL_HISTORY_COUNT_KEY)) || DEFAULT_HISTORY_COUNT)
+  const historySizeOptions = ref([
+    { label: '30', value: 30 },
+    { label: '50', value: 50 },
+    { label: '100', value: 100 },
+    { label: '200', value: 200 },
+  ])
   const history = ref<EmojiLikeItem[]>([])
+  watch(historySize, (newSize) => {
+    localStorage.setItem(LOCAL_HISTORY_COUNT_KEY, newSize.toString())
+    toast.success(`历史记录存留个数已更新为 ${newSize}`)
+    if (newSize < history.value.length) {
+      history.value = history.value.slice(0, newSize)
+      localStorage.setItem(EMOJI_HISTORY_KEY, JSON.stringify(history.value))
+    }
+  })
 
   // 初始化：从 localStorage 读取
   const init = () => {
@@ -47,6 +64,9 @@ export const useEmojiStore = defineStore("emoji", () => {
       } catch (e) {
         history.value = []
       }
+    }
+    if(!localStorage.getItem(LOCAL_HISTORY_COUNT_KEY) || localStorage.getItem(LOCAL_HISTORY_COUNT_KEY) === '') {
+      localStorage.setItem(LOCAL_HISTORY_COUNT_KEY, DEFAULT_HISTORY_COUNT.toString())
     }
   }
 
@@ -71,7 +91,9 @@ export const useEmojiStore = defineStore("emoji", () => {
   // 最近使用
   const setEmojiHistory = (emoji: EmojiLikeItem) => {
     if (!emoji.unicode || history.value.some(item => item.hexcode === emoji.hexcode)) return
-
+    if (history.value.length >= historySize.value) {
+      history.value.shift()
+    }
     history.value.push({
       unicode: emoji.unicode,
       hexcode: emoji.hexcode,
@@ -98,6 +120,13 @@ export const useEmojiStore = defineStore("emoji", () => {
     toast.success("已清空所有收藏")
   }
 
+  // 清空最近使用
+  const clearEmojiHistory = () => {
+    history.value = []
+    localStorage.setItem(EMOJI_HISTORY_KEY, JSON.stringify(history.value))
+    toast.success("已清空所有最近使用")
+  }
+
   // 初始化一次
   init()
 
@@ -113,5 +142,8 @@ export const useEmojiStore = defineStore("emoji", () => {
     getEmojiHistory,
     cancelEmojiHistory,
     clearEmojiLike,
+    clearEmojiHistory,
+    historySize,
+    historySizeOptions,
   };
 });

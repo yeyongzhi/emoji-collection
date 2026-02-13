@@ -21,7 +21,7 @@ import { useEmojiStore, type EmojiLikeItem } from '@/store/emoji'
 
 const emojiStore = useEmojiStore()
 
-const { data, showLabel } = defineProps({
+const { data, showLabel, highlight } = defineProps({
     data: {
         type: Object,
         default: () => ({})
@@ -29,12 +29,16 @@ const { data, showLabel } = defineProps({
     showLabel: {
         type: Boolean,
         default: true
+    },
+    highlight: {
+        type: String,
+        default: ''
     }
 })
 
 const copyEmoji = async (str: string, isUnicode: boolean = false) => {
     const res = await copyText(str)
-    if(isUnicode) {
+    if (isUnicode) {
         emojiStore.setEmojiHistory(data as EmojiLikeItem)
     }
     if (res) {
@@ -62,17 +66,37 @@ const isLike = computed(() => {
     return hexcodes.includes(data.hexcode)
 })
 
+const isHighlight = computed(() => {
+    return highlight && highlight.length > 0
+})
+
+// 添加这个工具函数（也可以抽到 utils）
+const escapeRegExp = (str: string): string => {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+// 计算高亮后的 label（含 HTML）
+const highlightedLabel = computed(() => {
+  if (!isHighlight.value || !data.label) return data.label
+  const escapedHighlight = escapeRegExp(highlight)
+  // 使用 gi：全局 + 忽略大小写（搜索体验更友好）
+  const regex = new RegExp(`(${escapedHighlight})`, 'gi')
+  return data.label.replace(regex, '<span class="text-(--color-primary) font-bold">$1</span>')
+})
+
 </script>
 
 <template>
     <div class="border border-2 rounded-xl p-(--padding-s) flex-col justify-center items-center">
-        <div title="点击复制" class="value text-center text-2xl" @click="copyEmoji(data.unicode, true)">{{ data.unicode }}</div>
-        <div v-if="showLabel" title="点击复制" class="text-sm w-full text-center mt-(--margin-s)" @click="copyEmoji(data.label)">{{
-            data.label }}</div>
+        <div title="点击复制" class="value text-center text-2xl" @click="copyEmoji(data.unicode, true)">{{ data.unicode }}
+        </div>
+        <div v-if="showLabel" title="点击复制" class="text-sm w-full text-center mt-(--margin-s)"
+            @click="copyEmoji(data.label)" v-html="highlightedLabel"></div>
         <TooltipProvider v-if="data.description && data.description !== ''">
             <Tooltip>
                 <TooltipTrigger class="w-full">
-                    <div class="text-muted-foreground text-xs w-full text-center mt-(--margin-s) overflow-hidden whitespace-nowrap text-ellipsis">
+                    <div
+                        class="text-muted-foreground text-xs w-full text-center mt-(--margin-s) overflow-hidden whitespace-nowrap text-ellipsis">
                         Tips: {{ data.description }}</div>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -85,26 +109,6 @@ const isLike = computed(() => {
             <Button @click="open = true" size="sm" variant="secondary" class="cursor-pointer">详情</Button>
             <Button @click="likeEmoji" size="sm" :variant="isLike ? 'default' : 'secondary'" class="cursor-pointer">{{
                 isLike ? '取消收藏' : '收藏' }}</Button>
-            <!-- <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger>
-                        <Button @click="open = true" size="sm" variant="secondary" class="cursor-pointer">详情</Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>点击查看详情</p>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
-            <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger>
-                        <Button size="sm" variant="secondary" class="cursor-pointer">收藏</Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>点击收藏</p>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider> -->
         </div>
         <Dialog v-model:open="open">
             <DialogContent>
@@ -117,7 +121,9 @@ const isLike = computed(() => {
                     <div
                         class="w-full mt-(--margin-xl) p-(--padding-m) flex gap-(--margin-m) justify-center items-center">
                         <Button variant="secondary" @click="copyEmoji(data.unicode)" class="cursor-pointer">复制</Button>
-                        <Button variant="secondary" @click="likeEmoji" class="cursor-pointer">收藏</Button>
+                        <Button @click="likeEmoji" size="sm" :variant="isLike ? 'default' : 'secondary'"
+                            class="cursor-pointer">{{
+                                isLike ? '取消收藏' : '收藏' }}</Button>
                     </div>
                     <div
                         class="details w-full mx-auto mt-(--margin-xl) p-(--padding-m) flex flex-col gap-(--margin-m) justify-center items-center">

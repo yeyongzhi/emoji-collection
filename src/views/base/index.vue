@@ -8,7 +8,7 @@ import {
     CardTitle,
 } from '@/components/ui/card'
 import { useEmojiStore } from '@/store/index'
-import { onMounted, onUnmounted, ref, nextTick } from 'vue'
+import { onMounted, onUnmounted, ref, nextTick, computed } from 'vue'
 import EmojiItem from '@/views/components/EmojiItem.vue'
 
 const EMOJI_GROUP_ID_PREFIX = 'emoji-group-'
@@ -17,15 +17,19 @@ const emojiStore = useEmojiStore()
 
 const data = ref<any>([])
 
+const groups = computed(() => {
+    let list = JSON.parse(JSON.stringify(emojiStore.emojiGroupData))
+    return list.slice(0, 1)
+})
+
 const initData = async () => {
-    const groups = JSON.parse(JSON.stringify(emojiStore.emojiGroupData))
-    if (groups.length > 0) {
-        groupIndex.value = groups[0].key
+    if (groups.value.length > 0) {
+        groupIndex.value = groups.value[0].key
     }
     const value = emojiStore.emojiData
     // console.log(value);
     let list: any = []
-    groups.forEach((item: any, groupIndex: number) => {
+    groups.value.forEach((item: any, groupIndex: number) => {
         list.push({
             key: item.key,
             name: item.message,
@@ -33,9 +37,7 @@ const initData = async () => {
         })
     })
     console.log(list);
-    // MOCK测试使用
-    data.value = [list[0]]
-    // data.value = list
+    data.value = list
 }
 
 let observer: IntersectionObserver | null = null
@@ -102,7 +104,7 @@ onUnmounted(() => {
             <CardContent>
                 <Tabs v-model="groupIndex" orientation="vertical" data-orientation="vertical">
                     <TabsList class="flex-col flex w-full h-fit gap-y-(--margin-xxs)">
-                        <TabsTrigger class="w-full" :value="group.key" v-for="group in emojiStore.emojiGroupData"
+                        <TabsTrigger class="w-full" :value="group.key" v-for="group in groups"
                             :key="group.key" @click="scrollToGroup(group.key)">
                             {{ group.message }}
                         </TabsTrigger>
