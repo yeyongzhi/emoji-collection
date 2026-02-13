@@ -9,6 +9,7 @@ import {
     ItemDescription,
     ItemTitle,
 } from '@/components/ui/item'
+import { Button } from '@/components/ui/button'
 import KnowImg from '@/assets/images/know.jpg'
 
 const data = ref<any>([])
@@ -51,6 +52,9 @@ onMounted(() => {
                     </ItemDescription>
                 </ItemContent>
                 <ItemActions>
+                    <Button>
+                        发布日期：{{ item.date }}
+                    </Button>
                 </ItemActions>
             </Item>
         </ScrollArea>
