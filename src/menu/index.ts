@@ -26,6 +26,13 @@ const APP_MENU = [
     name: "其他",
     children: [
       {
+        key: "random",
+        name: "随机表情",
+        component: defineAsyncComponent(
+          () => import("@/views/random/index.vue"),
+        ),
+      },
+      {
         key: "version",
         name: "版本信息",
         component: defineAsyncComponent(
