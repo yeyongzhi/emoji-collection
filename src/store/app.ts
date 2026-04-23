@@ -6,7 +6,7 @@ import { useColorMode } from '@vueuse/core'
 import { isSysetmDarkMode } from "@/utils/index";
 
 const mode = useColorMode()
-mode.value = isSysetmDarkMode() ? 'dark' : 'light'
+mode.value = 'light'
 
 const LOCAL_MENU_KEY = 'EMOJI_COLLECTION_MENU_KEY'
 const DEFAULT_MENU_KEY = 'base'

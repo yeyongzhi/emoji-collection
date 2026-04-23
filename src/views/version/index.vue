@@ -52,7 +52,7 @@ onMounted(() => {
                     </ItemDescription>
                 </ItemContent>
                 <ItemActions>
-                    <Button>
+                    <Button size="sm">
                         发布日期：{{ item.date }}
                     </Button>
                 </ItemActions>

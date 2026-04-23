@@ -3,9 +3,15 @@
     "data": [
         {
             "version": "V1.0.0",
-            "date": "2026-02",
+            "date": "2026.02",
             "emoji": "🚀",
             "description": "Emoji Collection 首次发布上线"
+        },
+        {
+            "version": "V1.0.1",
+            "date": "2026.04.23",
+            "emoji": "✨️",
+            "description": "优化首页性能；默认调整为亮色模式"
         }
     ]
 }
